@@ -35,6 +35,7 @@ class Rootfile_parser(object):
         return self._rootfile
 
     def get(self, era, channel, category, process, syst=None):
+        print
         if syst != None and self._type != "control":
             logger.fatal(
                 "Uncertainty shapes are only available in control plots!")
