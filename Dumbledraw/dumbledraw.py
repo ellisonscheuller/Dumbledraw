@@ -705,13 +705,17 @@ class Subplot(object):
                         hist[0].Divide(denominator)
 
     # normalizes bin contents of all histograms in the subplot to their bin width
-    def normalizeByBinWidth(self):
+    def normalizeByBinWidth(self, widths=None):
         for hist in self._hists.values():
             if not isinstance(hist[0], R.THStack):
                 denominator = copy.deepcopy(hist[0])
                 for i in range(denominator.GetNbinsX()):
-                    denominator.SetBinContent(i + 1,
-                                              denominator.GetBinWidth(i + 1))
+                    if widths is None:
+                        denominator.SetBinContent(i + 1,
+                                                  denominator.GetBinWidth(i + 1))
+                    else:
+                        denominator.SetBinContent(i + 1,
+                                                  widths[i])
                     denominator.SetBinError(i + 1, 0.0)
                 hist[0].Divide(denominator)
 
