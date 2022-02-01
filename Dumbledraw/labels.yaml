@@ -38,9 +38,11 @@ x_label:
     pt_ttjj: 'p_{T}(#tau#tau + di-Jet) (PF) / GeV'
     pt_ttjj_puppi: 'p_{T}(#tau#tau + di-Jet) (Puppi) / GeV'
     njets: 'Number of Jets'
+    njets_red: 'Number of Jets'
 
     # B-jet quantities
     nbtag: 'Number of b-tagged Jets'
+    nbtag_red: 'Number of b-tagged Jets'
     bpt_1: 'Leading b-Jet p_{T} / GeV'
     bpt_2: 'Trailing b-Jet p_{T} / GeV'
     beta_1: 'Leading b-Jet #eta'
@@ -119,9 +121,11 @@ x_label:
     pt_ttjj: 'p_{T}(#tau#tau + di-Jet) (PF) / GeV'
     pt_ttjj_puppi: 'p_{T}(#tau#tau + di-Jet) (Puppi) / GeV'
     njets: 'Number of Jets'
+    njets_red: 'Number of Jets'
 
     # B-jet quantities
     nbtag: 'Number of b-tagged Jets'
+    nbtag_red: 'Number of b-tagged Jets'
     bpt_1: 'Leading b-Jet p_{T} / GeV'
     bpt_2: 'Trailing b-Jet p_{T} / GeV'
     beta_1: 'Leading b-Jet #eta'
@@ -161,6 +165,9 @@ x_label:
     ME_costhetastar: 'MELA cos(#Theta*)'
     ME_phi: 'MELA #Phi'
     ME_phi1: 'MELA #Phi_{1}'
+
+    # gen match quantities
+    genMatchedLep1Pt: 'Electron p_{T}^{gen} / GeV'
   mt:
     # Dilepton Quantities
     m_vis: 'Visible di-#tau mass / GeV'
@@ -200,9 +207,11 @@ x_label:
     pt_ttjj: 'p_{T}(#tau#tau + di-Jet) (PF) / GeV'
     pt_ttjj_puppi: 'p_{T}(#tau#tau + di-Jet) (Puppi) / GeV'
     njets: 'Number of Jets'
+    njets_red: 'Number of Jets'
 
     # B-jet quantities
     nbtag: 'Number of b-tagged Jets'
+    nbtag_red: 'Number of b-tagged Jets'
     bpt_1: 'Leading b-Jet p_{T} / GeV'
     bpt_2: 'Trailing b-Jet p_{T} / GeV'
     beta_1: 'Leading b-Jet #eta'
@@ -281,9 +290,11 @@ x_label:
     pt_ttjj: 'p_{T}(#tau#tau + di-Jet) (PF) / GeV'
     pt_ttjj_puppi: 'p_{T}(#tau#tau + di-Jet) (Puppi) / GeV'
     njets: 'Number of Jets'
+    njets_red: 'Number of Jets'
 
     # B-jet quantities
     nbtag: 'Number of b-tagged Jets'
+    nbtag_red: 'Number of b-tagged Jets'
     bpt_1: 'Leading b-Jet p_{T} / GeV'
     bpt_2: 'Trailing b-Jet p_{T} / GeV'
     beta_1: 'Leading b-Jet #eta'
@@ -323,6 +334,9 @@ x_label:
     ME_costhetastar: 'MELA cos(#Theta*)'
     ME_phi: 'MELA #Phi'
     ME_phi1: 'MELA #Phi_{1}'
+
+    # gen match quantities
+    genMatchedLep1Pt: 'Electron p_{T}^{gen} / GeV'
   tt:
     # Dilepton Quantities
     m_vis: 'Visible di-#tau mass / GeV'
@@ -362,9 +376,11 @@ x_label:
     pt_ttjj: 'p_{T}(#tau#tau + di-Jet) (PF) / GeV'
     pt_ttjj_puppi: 'p_{T}(#tau#tau + di-Jet) (Puppi) / GeV'
     njets: 'Number of Jets'
+    njets_red: 'Number of Jets'
 
     # B-jet quantities
     nbtag: 'Number of b-tagged Jets'
+    nbtag_red: 'Number of b-tagged Jets'
     bpt_1: 'Leading b-Jet p_{T} / GeV'
     bpt_2: 'Trailing b-Jet p_{T} / GeV'
     beta_1: 'Leading b-Jet #eta'
