@@ -65,6 +65,7 @@ x_label:
     mt_tot_puppi: 'Total transverse mass m_{T}^{tot} (Puppi) / GeV'
     mTdileptonMET_puppi: 'Transverse mass m_{T}(#mu_{1}+#mu_{2}, #slash{E}_{T}) (Puppi) / GeV'
     pZetaPuppiMissVis: 'p_{#zeta}^{miss} - 0.85 #upoint p_{#zeta}^{vis} (Puppi) / GeV'
+    pzeta: 'p_{#zeta}^{miss} - 0.85 #upoint p_{#zeta}^{vis} (Puppi) / GeV'
 
     # MELA quantities
     ME_D: 'MELA D^{VBF}_{Z + 2 Jets}'
@@ -148,6 +149,7 @@ x_label:
     mt_tot_puppi: 'Total transverse mass m_{T}^{tot} (Puppi) / GeV'
     mTdileptonMET_puppi: 'Transverse mass m_{T}(e+#mu, #slash{E}_{T}) (Puppi) / GeV'
     pZetaPuppiMissVis: 'p_{#zeta}^{miss} - 0.85 #upoint p_{#zeta}^{vis} (Puppi) / GeV'
+    pzeta: 'p_{#zeta}^{miss} - 0.85 #upoint p_{#zeta}^{vis} (Puppi) / GeV'
 
     # MELA quantities
     ME_D: 'MELA D^{VBF}_{Z + 2 Jets}'
@@ -234,6 +236,7 @@ x_label:
     mt_tot_puppi: 'Total transverse mass m_{T}^{tot} (Puppi) / GeV'
     mTdileptonMET_puppi: 'Transverse mass m_{T}(#mu+^{}#tau_{h}, #slash{E}_{T}) (Puppi) / GeV'
     pZetaPuppiMissVis: 'p_{#zeta}^{miss} - 0.85 #upoint p_{#zeta}^{vis} (Puppi) / GeV'
+    pzeta: 'p_{#zeta}^{miss} - 0.85 #upoint p_{#zeta}^{vis} (Puppi) / GeV'
 
     # MELA quantities
     ME_D: 'MELA D^{VBF}_{Z + 2 Jets}'
@@ -317,6 +320,7 @@ x_label:
     mt_tot_puppi: 'Total transverse mass m_{T}^{tot} (Puppi) / GeV'
     mTdileptonMET_puppi: 'Transverse mass m_{T}(e+^{}#tau_{h}, #slash{E}_{T}) (Puppi) / GeV'
     pZetaPuppiMissVis: 'p_{#zeta}^{miss} - 0.85 #upoint p_{#zeta}^{vis} (Puppi) / GeV'
+    pzeta: 'p_{#zeta}^{miss} - 0.85 #upoint p_{#zeta}^{vis} (Puppi) / GeV'
 
     # MELA quantities
     ME_D: 'MELA D^{VBF}_{Z + 2 Jets}'
@@ -403,6 +407,7 @@ x_label:
     mt_tot_puppi: 'Total transverse mass m_{T}^{tot} (Puppi) / GeV'
     mTdileptonMET_puppi: 'Transverse mass m_{T}(^{}#tau_{h,1}+^{}#tau_{h,2}, #slash{E}_{T}) (Puppi) / GeV'
     pZetaPuppiMissVis: 'p_{#zeta}^{miss} - 0.85 #upoint p_{#zeta}^{vis} (Puppi) / GeV'
+    pzeta: 'p_{#zeta}^{miss} - 0.85 #upoint p_{#zeta}^{vis} (Puppi) / GeV'
 
     # MELA quantities
     ME_D: 'MELA D^{VBF}_{Z + 2 Jets}'
