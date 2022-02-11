@@ -101,15 +101,15 @@ class Plot(object):
                 begin_left = 0.145
             latex2.DrawLatex(begin_left, 0.960, text)
 
-    def DrawCMS(self,position=0):
+    def DrawCMS(self,position=0, cms_sub='Preliminary'):
         if position==0:
-            styles.DrawCMSLogo(self._subplots[0]._pad, 'CMS', 'Preliminary', 11,
+            styles.DrawCMSLogo(self._subplots[0]._pad, 'CMS', cms_sub, 11,
                                0.045, 0.05, 1.0, '', 0.6)
         elif position=="outside":
-            styles.DrawCMSLogo(self._subplots[0]._pad, 'CMS', 'Preliminary', 0,
+            styles.DrawCMSLogo(self._subplots[0]._pad, 'CMS', cms_sub, 0,
                                0.095, 0.05, 1.0, '', 0.6)
         else:
-            styles.DrawCMSLogo(self._subplots[0]._pad, 'CMS', 'Preliminary', 11,
+            styles.DrawCMSLogo(self._subplots[0]._pad, 'CMS', cms_sub, 11,
                                0.795, 0.05, 1.0, '', 0.6)
 
     def DrawLumi(self, lumi, textsize=0.6):
