@@ -434,11 +434,13 @@ x_label:
 
 legend_label:
     HTT: 'H#rightarrow#tau#tau'
+    HSM: 'H(125 GeV)#rightarrow#tau#tau'
     ggH: 'gg#rightarrowH'
     qqH: 'qq#rightarrowH'
     VH: 'qq#rightarrowVH'
     WH: 'qq#rightarrowWH'
     ZH: 'qq#rightarrowZH'
+    HWW: 'H(125 GeV)#rightarrowWW'
     ZTT: 'Z#rightarrow#tau#tau'
     EMB: '#mu#rightarrow#tau embedded'
     ZLL: 'Z#rightarrowll'

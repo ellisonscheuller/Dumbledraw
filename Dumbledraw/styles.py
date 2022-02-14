@@ -51,7 +51,8 @@ color_dict = {
     "QCD": R.TColor.GetColor(250, 202, 255),
     "QCDEMB": R.TColor.GetColor(250, 202, 255),
     "QCDMC": R.TColor.GetColor(250, 202, 255),
-    "EWK": R.TColor.GetColor("#E1F5A9"),
+    # "EWK": R.TColor.GetColor("#E1F5A9"),
+    "EWK": R.TColor.GetColor(222, 90, 106),
     "EWKT": R.TColor.GetColor("#E1F5A9"),
     "EWKL": R.TColor.GetColor("#E1F5A9"),
     "EWKJ": R.TColor.GetColor("#E1F5A9"),
@@ -62,6 +63,8 @@ color_dict = {
     "jetFakesTT": R.TColor.GetColor(155, 152, 204),
     "jetFakesEMB": R.TColor.GetColor(192, 232, 100),
     "jetFakesMC": R.TColor.GetColor(192, 232, 100),
+    "HSM": R.TColor.GetColor("#001eff"),
+    "VLQ": R.TColor.GetColor("#2ab7ca"),
     "unc": CreateTransparentColor(12, 0.4)
 }
 
