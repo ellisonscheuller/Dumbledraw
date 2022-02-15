@@ -472,4 +472,5 @@ legend_label:
     jetFakesQCD: 'Jet#rightarrow^{}#tau_{h} (QCD)'
     jetFakesTT: 'Jet#rightarrow^{}#tau_{h} (TT)'
     jetFakesEMB: 'Jet#rightarrow^{}#tau_{h}'
+    other: 'Other Bkg.'
     data_obs: 'Data'

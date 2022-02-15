@@ -65,6 +65,7 @@ color_dict = {
     "jetFakesMC": R.TColor.GetColor(192, 232, 100),
     "HSM": R.TColor.GetColor("#001eff"),
     "VLQ": R.TColor.GetColor("#2ab7ca"),
+    "other": R.TColor.GetColor("#B0C4DE"),
     "unc": CreateTransparentColor(12, 0.4)
 }
 
