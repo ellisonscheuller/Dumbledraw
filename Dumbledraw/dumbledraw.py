@@ -542,6 +542,12 @@ class Subplot(object):
     def scaleYLabelOffset(self, val):
         self._ylabeloffsetscale = val
 
+    def remove_lower_x_ticks(self):
+        # Get stack if stack is the first drawn object
+        self._pad.cd()
+        for prim in self._pad.GetListOfPrimitives():
+            prim.GetXaxis().SetTickLength(0.)
+
 
     # internal method to apply formatting to initial histograms
     def setAxisStyles(self, hist):
