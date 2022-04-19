@@ -861,6 +861,9 @@ class Legend(object):
         elif histname in self._subplots[subplot_index]._graphs.keys():
             self._legend.AddEntry(
                 self._subplots[subplot_index]._graphs[histname][0], label, style)
+        elif histname == "":
+            self._legend.AddEntry(
+                R.MakeNullPointer(R.TObject), label, style)
         else:
             logger.fatal("Requested histogram for legend does not exist!")
             raise Exception
