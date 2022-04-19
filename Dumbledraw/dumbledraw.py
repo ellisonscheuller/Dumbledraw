@@ -13,7 +13,8 @@ import styles
 
 
 class Plot(object):
-    def __init__(self, splitlist, style="none", **kwargs):
+    def __init__(self, splitlist, style="none", invert_pad_creation=False,
+                 **kwargs):
         styles.SetStyle(style, **kwargs)
         R.gROOT.SetBatch(True)  # don't disply canvas
         self._canvas = R.TCanvas()
@@ -26,6 +27,8 @@ class Plot(object):
             splitlist = [splitlist]
         lower = 1.0
         upper = 1.0
+        # Only needed if order of pad creation should be inverted
+        pad_coordinates = []
         for i, split in enumerate(splitlist):
             if not isinstance(split, float):
                 lower = split[0]
@@ -35,13 +38,25 @@ class Plot(object):
             if not isinstance(lower, float):
                 logger.fatal("Panel split is supposed to be of type float!")
                 raise Exception
-            self._subplots.append(Subplot(i, lower, upper))
+            if invert_pad_creation:
+                pad_coordinates.append((lower, upper))
+            else:
+                self._subplots.append(Subplot(i, lower, upper))
             upper = split
             if not isinstance(upper, float):
                 logger.fatal("Panel split is supposed to be of type float!")
                 raise Exception
         lower = 0.0
-        self._subplots.append(Subplot(len(splitlist), lower, upper))
+        if invert_pad_creation:
+            pad_coordinates.append((lower, upper))
+            # Ensure naming of the pads stays the same even though
+            # this is never really used.
+            for i, (lower, upper) in zip(range(len(pad_coordinates)-1, -1, -1), reversed(pad_coordinates)):
+                self._subplots.append(Subplot(i, lower, upper))
+            # Reverse the order of the subplots to ensure the same numbering
+            self._subplots.reverse()
+        else:
+            self._subplots.append(Subplot(len(splitlist), lower, upper))
 
     @property
     def nsubplots(self):
