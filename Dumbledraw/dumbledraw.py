@@ -117,15 +117,17 @@ class Plot(object):
             latex2.DrawLatex(begin_left, 0.960, text)
 
     def DrawCMS(self,position=0, cms_sub='Preliminary'):
+        # Make CMS logo bigger if no extra text is used
+        cms_scale = 1.0 if cms_sub == "" else 0.6
         if position==0:
             styles.DrawCMSLogo(self._subplots[0]._pad, 'CMS', cms_sub, 11,
-                               0.045, 0.05, 1.0, '', 0.6)
+                               0.040, 0.05, 1.0, '', cms_scale)
         elif position=="outside":
             styles.DrawCMSLogo(self._subplots[0]._pad, 'CMS', cms_sub, 0,
                                0.095, 0.05, 1.0, '', 0.6)
         else:
             styles.DrawCMSLogo(self._subplots[0]._pad, 'CMS', cms_sub, 11,
-                               0.795, 0.05, 1.0, '', 0.6)
+                               0.795, 0.05, 1.0, '', cms_scale)
 
     def DrawLumi(self, lumi, textsize=0.6):
         styles.DrawTitle(self._subplots[0]._pad, lumi, 3, textsize)
