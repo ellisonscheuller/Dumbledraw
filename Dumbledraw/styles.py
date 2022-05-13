@@ -72,7 +72,7 @@ color_dict = {
 
 def SetStyle(name, **kwargs):
     styles = {"none": none, "TDR": SetTDRStyle, "ModTDR": ModTDRStyle}
-    if not name in styles.keys():
+    if not name in list(styles.keys()):
         logger.fatal("%s style not available!" % name)
     logger.info("Set plotting style to %s" % name)
     styles[name](**kwargs)

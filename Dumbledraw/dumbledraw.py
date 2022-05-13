@@ -9,7 +9,7 @@ import math
 #import rootfile_parser
 logger = logging.getLogger(__name__)
 
-import styles
+from . import styles
 
 
 class Plot(object):
@@ -24,7 +24,7 @@ class Plot(object):
         self._inlets = []
         self._inlets_legends = []
         # evaluate splitlist and book
-        if isinstance(splitlist, basestring):
+        if isinstance(splitlist, str):
             splitlist = [splitlist]
         lower = 1.0
         upper = 1.0
@@ -367,7 +367,7 @@ class Subplot(object):
 
     # adds histogram to subplot and assign individual name and group name. Default group name = "invisible" which is ignored by DrawAll function.
     def add_hist(self, hist, name, group_name="invisible"):
-        if name in self._hists.keys():
+        if name in list(self._hists.keys()):
             logger.fatal("Histogram name %s already used!")
             raise Exception
         if not (isinstance(hist, R.TH1D) or isinstance(hist, R.TH1F)):
@@ -380,7 +380,7 @@ class Subplot(object):
         ]  # last entry is used to save the markerstyle and set in a different function
 
     def add_graph(self, graph, name, group_name="invisible"):
-        if name in self._graphs.keys():
+        if name in list(self._graphs.keys()):
             logger.fatal("Graph name %s already used!")
             raise Exception
         if not isinstance(graph, R.TGraph):
@@ -394,14 +394,14 @@ class Subplot(object):
 
     # returns histogram with given name or sum of histograms with given group name
     def get_hist(self, name):
-        if name in self._hists.keys():
+        if name in list(self._hists.keys()):
             if isinstance(self._hists[name][0], R.THStack):
                 logger.fatal("get_hist does not accept names of stacks!")
                 raise Exception
             return self._hists[name][0]
         else:
             empty = True
-            for entry in self._hists.values():
+            for entry in list(self._hists.values()):
                 if entry[1] == name:
                     if isinstance(entry[0], R.THStack):
                         logger.fatal(
@@ -420,7 +420,7 @@ class Subplot(object):
                 return hist
 
     def get_graph(self, name):
-        if name in self._graphs.keys():
+        if name in list(self._graphs.keys()):
             return self._graphs[name]
 
     # draws all histograms assigned to the subplot except those with group name "invisible"
@@ -429,7 +429,7 @@ class Subplot(object):
             self.DrawUnrolled([entry for entry in self._hists() if not self._hists[entry][1] == "invisible"])
         else:
             isFirst = True
-            for hist in self._hists.values():
+            for hist in list(self._hists.values()):
                 if not hist[1] == "invisible":
                     self.DrawSingle(hist, isFirst)
                     isFirst = False
@@ -440,18 +440,18 @@ class Subplot(object):
         if isinstance(self._unroll, list):
             self.DrawUnrolled(names)
         else:
-            if isinstance(names, basestring):
+            if isinstance(names, str):
                 names = [names]
             isFirst = True
             for name in names:
-                if name in self._hists.keys():
+                if name in list(self._hists.keys()):
                     self.DrawSingle(self._hists[name], isFirst)
                     isFirst = False
-                elif name in self._graphs.keys():
+                elif name in list(self._graphs.keys()):
                     self.DrawSingle(self._graphs[name], isFirst)
                     isFirst = False
                 else:
-                    for entry in self._hists.values():
+                    for entry in list(self._hists.values()):
                         if entry[1] == name:
                             self.DrawSingle(entry, isFirst)
                             isFirst = False
@@ -684,9 +684,9 @@ class Subplot(object):
                       fillstyle=1001,
                       alpha=1.0):
         markerstyledict = {}
-        if markerstyle in markerstyledict.keys():
+        if markerstyle in list(markerstyledict.keys()):
             markerstyle = markerstyledict[markerstyle]
-        if name in self._hists.keys():
+        if name in list(self._hists.keys()):
             if isinstance(self._hists[name][0], R.THStack):
                 logger.warning(
                     "Adressed object is stack. Style cannot be set!")
@@ -700,7 +700,7 @@ class Subplot(object):
             self._hists[name][0].SetMarkerSize(markersize)
             self._hists[name][0].SetLineStyle(linestyle)
             self._hists[name][0].SetFillStyle(fillstyle)
-        elif name in self._graphs.keys():
+        elif name in list(self._graphs.keys()):
             self._graphs[name][2] = markerstyle
             self._graphs[name][0].SetMarkerStyle(markershape)
             self._graphs[name][0].SetMarkerColor(markercolor)
@@ -711,7 +711,7 @@ class Subplot(object):
             self._graphs[name][0].SetLineStyle(linestyle)
             self._graphs[name][0].SetFillStyle(fillstyle)
         else:
-            for hist in self._hists.values():
+            for hist in list(self._hists.values()):
                 if hist[1] == name:
                     if isinstance(hist[0], R.THStack):
                         logger.warning(
@@ -729,20 +729,20 @@ class Subplot(object):
 
     # creates stack from registered histograms defined via name or group name
     def create_stack(self, hist_names, name, group_name="invisible"):
-        if name in self._hists.keys():
+        if name in list(self._hists.keys()):
             logger.fatal("Stack name %s already used!" % name)
             raise Exception
         stack = R.THStack("hs", "")
         # regularize inputs
-        if isinstance(hist_names, basestring):
+        if isinstance(hist_names, str):
             hist_names = [hist_names]
         for hist_name in hist_names:
-            if hist_name in self._hists.keys():
+            if hist_name in list(self._hists.keys()):
                 stack.Add(self._hists[hist_name][0])
                 logger.debug(
                     "Added histogram %s to stack %s" % (hist_name, name))
             else:
-                for key, hist in self._hists.iteritems():
+                for key, hist in self._hists.items():
                     if hist_name == hist[1]:
                         if isinstance(hist[0], R.THStack):
                             logger.fatal(
@@ -757,9 +757,9 @@ class Subplot(object):
     # normalizes one or more histograms to a given denominator
     def normalize(self, nominator_names, denominator_names):
         # regularize inputs
-        if isinstance(nominator_names, basestring):
+        if isinstance(nominator_names, str):
             nominator_names = [nominator_names]
-        if isinstance(denominator_names, basestring):
+        if isinstance(denominator_names, str):
             denominator_names = [denominator_names]
 
         # sum up denominator
@@ -771,18 +771,18 @@ class Subplot(object):
             else:
                 denominator.Add(self.get_hist(name))
         # do not propagate denominator errors
-        for i in xrange(1, denominator.GetNbinsX() + 1):
+        for i in range(1, denominator.GetNbinsX() + 1):
             denominator.SetBinError(i, 0.)
 
         # normalize all nominator inputs
         for name in nominator_names:
-            if name in self._hists.keys():
+            if name in list(self._hists.keys()):
                 if isinstance(self._hists[name][0], R.THStack):
                     logger.fatal("Stacks cannot be normalized!")
                     raise Exception
                 self._hists[name][0].Divide(denominator)
             else:
-                for hist in self._hists.values():
+                for hist in list(self._hists.values()):
                     if hist[1] == name:
                         if isinstance(hist[0], R.THStack):
                             logger.fatal("Stacks cannot be normalized!")
@@ -791,7 +791,7 @@ class Subplot(object):
 
     # normalizes bin contents of all histograms in the subplot to their bin width
     def normalizeByBinWidth(self):
-        for hist in self._hists.values():
+        for hist in list(self._hists.values()):
             if not isinstance(hist[0], R.THStack):
                 denominator = copy.deepcopy(hist[0])
                 for i in range(denominator.GetNbinsX()):
@@ -807,7 +807,7 @@ class Subplot(object):
         self._unroll_label_angle = ur_label_angle
         self._unroll_label_scalesize = ur_label_size
         if selection == None:
-            self._selection = range(len(self._unroll))
+            self._selection = list(range(len(self._unroll)))
         else:
             self._selection = selection
 
@@ -939,10 +939,10 @@ class Legend(object):
         if subplot_index >= len(self._subplots):
             logger.fatal("Subplot index is out of range!")
             raise Exception
-        if histname in self._subplots[subplot_index]._hists.keys():
+        if histname in list(self._subplots[subplot_index]._hists.keys()):
             self._legend.AddEntry(
                 self._subplots[subplot_index]._hists[histname][0], label, style)
-        elif histname in self._subplots[subplot_index]._graphs.keys():
+        elif histname in list(self._subplots[subplot_index]._graphs.keys()):
             self._legend.AddEntry(
                 self._subplots[subplot_index]._graphs[histname][0], label, style)
         else:

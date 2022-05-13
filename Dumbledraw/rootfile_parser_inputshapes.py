@@ -32,7 +32,7 @@ class Rootfile_parser(object):
             mass=self._mass)
         logger.debug("Try to access %s in %s" % (hist_hash,
                                                  self._rootfilename))
-        print "rootfile: " , self._rootfile.Get(hist_hash), " hash: ", hist_hash
+        print("rootfile: " , self._rootfile.Get(hist_hash), " hash: ", hist_hash)
 
         return self._rootfile.Get(hist_hash)
 
