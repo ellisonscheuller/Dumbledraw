@@ -4,6 +4,7 @@
 import logging
 import ROOT
 import copy
+
 logger = logging.getLogger(__name__)
 
 
@@ -29,10 +30,10 @@ class Rootfile_parser(object):
             analysis=self._analysis,
             epoch=self._epoch,
             variable=self._variable,
-            mass=self._mass)
-        logger.debug("Try to access %s in %s" % (hist_hash,
-                                                 self._rootfilename))
-        print("rootfile: " , self._rootfile.Get(hist_hash), " hash: ", hist_hash)
+            mass=self._mass,
+        )
+        logger.debug("Try to access %s in %s" % (hist_hash, self._rootfilename))
+        print("rootfile: ", self._rootfile.Get(hist_hash), " hash: ", hist_hash)
 
         return self._rootfile.Get(hist_hash)
 

@@ -1,24 +1,26 @@
 import ROOT as R
 import logging
 import yaml
+
 logger = logging.getLogger(__name__)
 
 COL_STORE = []
-labels_path = 'Dumbledraw/Dumbledraw/labels.yaml'
+labels_path = "Dumbledraw/Dumbledraw/labels.yaml"
 
 
 def CreateTransparentColor(color, alpha):
     adapt = R.gROOT.GetColor(color)
     new_idx = R.gROOT.GetListOfColors().GetLast() + 1
-    trans = R.TColor(new_idx, adapt.GetRed(), adapt.GetGreen(),
-                     adapt.GetBlue(), '', alpha)
+    trans = R.TColor(
+        new_idx, adapt.GetRed(), adapt.GetGreen(), adapt.GetBlue(), "", alpha
+    )
     COL_STORE.append(trans)
-    trans.SetName('userColor%i' % new_idx)
+    trans.SetName("userColor%i" % new_idx)
     return new_idx
 
 
-legend_label_dict = yaml.load(open(labels_path))['legend_label']
-x_label_dict = yaml.load(open(labels_path))['x_label']
+legend_label_dict = yaml.safe_load(open(labels_path))["legend_label"]
+x_label_dict = yaml.safe_load(open(labels_path))["x_label"]
 
 color_dict = {
     "ggH": R.TColor.GetColor("#fed766"),
@@ -47,10 +49,10 @@ color_dict = {
     "VV": R.TColor.GetColor("#6F2D35"),
     "VVT": R.TColor.GetColor("#6F2D35"),
     "VVJ": R.TColor.GetColor("#c38a91"),
-    "VVL" : R.TColor.GetColor("#6F2D35"),
+    "VVL": R.TColor.GetColor("#6F2D35"),
     "ST": R.TColor.GetColor("#d0f0c1"),
     "STT": R.TColor.GetColor("#d0f0c1"),
-    "STL" : R.TColor.GetColor("#d0f0c1"),
+    "STL": R.TColor.GetColor("#d0f0c1"),
     "QCD": R.TColor.GetColor(250, 202, 255),
     "QCDEMB": R.TColor.GetColor(250, 202, 255),
     "EWK": R.TColor.GetColor("#E1F5A9"),
@@ -64,9 +66,9 @@ color_dict = {
     "jetFakesTT": R.TColor.GetColor(155, 152, 204),
     "jetFakesEMB": R.TColor.GetColor(192, 232, 100),
     "jetFakesCMB": R.TColor.GetColor(250, 202, 255),
-    "TotalBkg": R.TColor.GetColor(211,211,211),
+    "TotalBkg": R.TColor.GetColor(211, 211, 211),
     "REST": R.TColor.GetColor("#B0C4DE"),
-    "unc": CreateTransparentColor(12, 0.4)
+    "unc": CreateTransparentColor(12, 0.4),
 }
 
 
@@ -131,7 +133,7 @@ def SetTDRStyle():
 
     # For the fit/function:
     R.gStyle.SetOptFit(1)
-    R.gStyle.SetFitFormat('5.4g')
+    R.gStyle.SetFitFormat("5.4g")
     R.gStyle.SetFuncColor(2)
     R.gStyle.SetFuncStyle(1)
     R.gStyle.SetFuncWidth(1)
@@ -149,7 +151,7 @@ def SetTDRStyle():
     R.gStyle.SetStatFont(42)
     R.gStyle.SetStatFontSize(0.025)
     R.gStyle.SetStatTextColor(1)
-    R.gStyle.SetStatFormat('6.4g')
+    R.gStyle.SetStatFormat("6.4g")
     R.gStyle.SetStatBorderSize(1)
     R.gStyle.SetStatH(0.1)
     R.gStyle.SetStatW(0.15)
@@ -178,9 +180,9 @@ def SetTDRStyle():
     # R.gStyle.SetTitleBorderSize(2)
 
     # For the axis titles:
-    R.gStyle.SetTitleColor(1, 'XYZ')
-    R.gStyle.SetTitleFont(42, 'XYZ')
-    R.gStyle.SetTitleSize(0.06, 'XYZ')
+    R.gStyle.SetTitleColor(1, "XYZ")
+    R.gStyle.SetTitleFont(42, "XYZ")
+    R.gStyle.SetTitleSize(0.06, "XYZ")
     # Another way to set the size?
     # R.gStyle.SetTitleXSize(Float_t size = 0.02)
     # R.gStyle.SetTitleYSize(Float_t size = 0.02)
@@ -190,17 +192,17 @@ def SetTDRStyle():
 
     # For the axis labels:
 
-    R.gStyle.SetLabelColor(1, 'XYZ')
-    R.gStyle.SetLabelFont(42, 'XYZ')
-    R.gStyle.SetLabelOffset(0.007, 'XYZ')
-    R.gStyle.SetLabelSize(0.05, 'XYZ')
+    R.gStyle.SetLabelColor(1, "XYZ")
+    R.gStyle.SetLabelFont(42, "XYZ")
+    R.gStyle.SetLabelOffset(0.007, "XYZ")
+    R.gStyle.SetLabelSize(0.05, "XYZ")
 
     # For the axis:
 
-    R.gStyle.SetAxisColor(1, 'XYZ')
+    R.gStyle.SetAxisColor(1, "XYZ")
     R.gStyle.SetStripDecimals(True)
-    R.gStyle.SetTickLength(0.03, 'XYZ')
-    R.gStyle.SetNdivisions(510, 'XYZ')
+    R.gStyle.SetTickLength(0.03, "XYZ")
+    R.gStyle.SetNdivisions(510, "XYZ")
     R.gStyle.SetPadTickX(1)
     R.gStyle.SetPadTickY(1)
 
@@ -210,7 +212,7 @@ def SetTDRStyle():
     R.gStyle.SetOptLogz(0)
 
     # Postscript options:
-    R.gStyle.SetPaperSize(20., 20.)
+    R.gStyle.SetPaperSize(20.0, 20.0)
     # R.gStyle.SetLineScalePS(Float_t scale = 3)
     # R.gStyle.SetLineStyleString(Int_t i, const char* text)
     # R.gStyle.SetHeaderPS(const char* header)
@@ -249,8 +251,8 @@ def ModTDRStyle(width=600, height=600, t=0.06, b=0.12, l=0.16, r=0.04):
     def_w = float(R.gStyle.GetCanvasDefW())
     def_h = float(R.gStyle.GetCanvasDefH())
 
-    scale_h = (def_w / def_h) if (def_h > def_w) else 1.
-    scale_w = (def_h / def_w) if (def_w > def_h) else 1.
+    scale_h = (def_w / def_h) if (def_h > def_w) else 1.0
+    scale_w = (def_h / def_w) if (def_w > def_h) else 1.0
 
     def_min = def_h if (def_h < def_w) else def_w
 
@@ -266,17 +268,17 @@ def ModTDRStyle(width=600, height=600, t=0.06, b=0.12, l=0.16, r=0.04):
     # 0.08, 0.12, 0.12, 0.04
 
     # Set number of axis tick divisions
-    R.gStyle.SetNdivisions(506, 'XYZ')  # default 510
+    R.gStyle.SetNdivisions(506, "XYZ")  # default 510
 
     # Some marker properties not set in the default tdr style
     R.gStyle.SetMarkerColor(R.kBlack)
     R.gStyle.SetMarkerSize(1.0)
 
-    R.gStyle.SetLabelOffset(0.007, 'YZ')
+    R.gStyle.SetLabelOffset(0.007, "YZ")
     # This is an adhoc adjustment to scale the x-axis label
     # offset when we stretch plot vertically
     # Will also need to increase if first x-axis label has more than one digit
-    R.gStyle.SetLabelOffset(0.005 * (3. - 2. / scale_h), 'X')
+    R.gStyle.SetLabelOffset(0.005 * (3.0 - 2.0 / scale_h), "X")
 
     # In this next part we do a slightly involved calculation to set the axis
     # title offsets, depending on the values of the TPad dimensions and
@@ -287,44 +289,47 @@ def ModTDRStyle(width=600, height=600, t=0.06, b=0.12, l=0.16, r=0.04):
     title_size = 0.05
     title_px = title_size * def_min
     label_size = 0.04
-    R.gStyle.SetTitleSize(title_size, 'XYZ')
-    R.gStyle.SetLabelSize(label_size, 'XYZ')
+    R.gStyle.SetTitleSize(title_size, "XYZ")
+    R.gStyle.SetLabelSize(label_size, "XYZ")
 
     R.gStyle.SetTitleXOffset(
-        0.5 * scale_h * (1.2 *
-                         (def_h * b * scale_h - 0.6 * title_px)) / title_px)
+        0.5 * scale_h * (1.2 * (def_h * b * scale_h - 0.6 * title_px)) / title_px
+    )
     R.gStyle.SetTitleYOffset(
-        0.5 * scale_w * (1.2 *
-                         (def_w * l * scale_w - 0.6 * title_px)) / title_px)
+        0.5 * scale_w * (1.2 * (def_w * l * scale_w - 0.6 * title_px)) / title_px
+    )
 
     # Only draw ticks where we have an axis
     R.gStyle.SetPadTickX(0)
     R.gStyle.SetPadTickY(0)
-    R.gStyle.SetTickLength(0.02, 'XYZ')
+    R.gStyle.SetTickLength(0.02, "XYZ")
 
     R.gStyle.SetLegendBorderSize(0)
     R.gStyle.SetLegendFont(42)
     R.gStyle.SetLegendFillColor(0)
-    #R.gStyle.SetFillColor(0)
+    # R.gStyle.SetFillColor(0)
 
     R.gROOT.ForceStyle()
 
-    R.TGaxis.SetExponentOffset(-0.07, 0.0, "y");
+    R.TGaxis.SetExponentOffset(-0.07, 0.0, "y")
 
-def DrawText(pad, text, scale_text_size, pos, angle, custom_pos = None):
+
+def DrawText(pad, text, scale_text_size, pos, angle, custom_pos=None):
     pad.cd()
     left_border = pad.GetLeftMargin()
     right_border = 1.0 - pad.GetRightMargin()
     top_border = 1.0 - pad.GetTopMargin()
     bottom_border = pad.GetBottomMargin()
-    
+
     x_pos = 0.0
     y_pos = 0.0
     alignment = 22
-    
+
     if custom_pos != None:
         if not (isinstance(custom_pos, list) and len(custom_pos) == 2):
-            logger.fatal("Custom text position must be list with two entries, i.e. relative x and y coordinate in the pad")
+            logger.fatal(
+                "Custom text position must be list with two entries, i.e. relative x and y coordinate in the pad"
+            )
             raise Exception
         else:
             x_pos = left_border + custom_pos[0] * (right_border - left_border)
@@ -332,8 +337,12 @@ def DrawText(pad, text, scale_text_size, pos, angle, custom_pos = None):
     else:
         if pos >= 1 and pos <= 9:
             pos = pos - 1
-            x_pos = left_border + (0.07 + (pos % 3) * 0.43) * (right_border - left_border)
-            y_pos = top_border + (0.07 + (pos / 3) * 0.43) * (bottom_border - top_border)
+            x_pos = left_border + (0.07 + (pos % 3) * 0.43) * (
+                right_border - left_border
+            )
+            y_pos = top_border + (0.07 + (pos / 3) * 0.43) * (
+                bottom_border - top_border
+            )
             alignment = 10 * ((pos % 3) + 1) + 3 - (pos / 3)
             if angle == 90:
                 alignment = 10 * (alignment % 10) + 4 - alignment / 10
@@ -352,17 +361,20 @@ def DrawText(pad, text, scale_text_size, pos, angle, custom_pos = None):
     latex.SetTextSize(0.04 * scale_text_size)
     latex.DrawLatex(x_pos, y_pos, text)
 
-def DrawCMSLogo(pad,
-                cmsText,
-                extraText,
-                iPosX,
-                relPosX,
-                relPosY,
-                relExtraDY,
-                extraText2='',
-                cmsTextSize=0.8):
+
+def DrawCMSLogo(
+    pad,
+    cmsText,
+    extraText,
+    iPosX,
+    relPosX,
+    relPosY,
+    relExtraDY,
+    extraText2="",
+    cmsTextSize=0.8,
+):
     """Blah
-    
+
     Args:
         pad (TYPE): Description
         cmsText (TYPE): Description
@@ -373,7 +385,7 @@ def DrawCMSLogo(pad,
         relExtraDY (TYPE): Description
         extraText2 (str): Description
         cmsTextSize (float): Description
-    
+
     Returns:
         TYPE: Description
     """
@@ -398,17 +410,17 @@ def DrawCMSLogo(pad,
 
     alignY_ = 3
     alignX_ = 2
-    if (iPosX / 10 == 0):
+    if iPosX / 10 == 0:
         alignX_ = 1
-    if (iPosX == 0):
+    if iPosX == 0:
         alignX_ = 1
-    if (iPosX == 0):
+    if iPosX == 0:
         alignY_ = 1
-    if (iPosX / 10 == 1):
+    if iPosX / 10 == 1:
         alignX_ = 1
-    if (iPosX / 10 == 2):
+    if iPosX / 10 == 2:
         alignX_ = 2
-    if (iPosX / 10 == 3):
+    if iPosX / 10 == 3:
         alignX_ = 3
     # if (iPosX == 0): relPosX = 0.14
     align_ = 10 * alignX_ + alignY_
@@ -424,10 +436,11 @@ def DrawCMSLogo(pad,
     latex.SetTextColor(R.kBlack)
 
     extraTextSize = extraOverCmsTextSize * cmsTextSize
-    pad_ratio = (float(pad.GetWh()) * pad.GetAbsHNDC()) / \
-        (float(pad.GetWw()) * pad.GetAbsWNDC())
-    if (pad_ratio < 1.):
-        pad_ratio = 1.
+    pad_ratio = (float(pad.GetWh()) * pad.GetAbsHNDC()) / (
+        float(pad.GetWw()) * pad.GetAbsWNDC()
+    )
+    if pad_ratio < 1.0:
+        pad_ratio = 1.0
 
     if outOfFrame:
         latex.SetTextFont(cmsTextFont)
@@ -438,9 +451,9 @@ def DrawCMSLogo(pad,
     posX_ = 0
     if iPosX % 10 <= 1:
         posX_ = l + relPosX * (1 - l - r)
-    elif (iPosX % 10 == 2):
+    elif iPosX % 10 == 2:
         posX_ = l + 0.5 * (1 - l - r)
-    elif (iPosX % 10 == 3):
+    elif iPosX % 10 == 3:
         posX_ = 1 - r - relPosX * (1 - l - r)
 
     posY_ = 1 - t - relPosY * (1 - t - b)
@@ -453,12 +466,11 @@ def DrawCMSLogo(pad,
             latex.SetTextFont(extraTextFont)
             latex.SetTextAlign(align_)
             latex.SetTextSize(extraTextSize * t * pad_ratio)
-            latex.DrawLatex(posX_, posY_ - relExtraDY * cmsTextSize * t,
-                            extraText)
+            latex.DrawLatex(posX_, posY_ - relExtraDY * cmsTextSize * t, extraText)
             if writeExtraText2:
-                latex.DrawLatex(posX_,
-                                posY_ - 1.8 * relExtraDY * cmsTextSize * t,
-                                extraText2)
+                latex.DrawLatex(
+                    posX_, posY_ - 1.8 * relExtraDY * cmsTextSize * t, extraText2
+                )
     elif writeExtraText:
         if iPosX == 0:
             posX_ = l + relPosX * (1 - l - r)
@@ -476,10 +488,11 @@ def DrawTitle(pad, text, align, textSize=0.6):
     l = pad.GetLeftMargin()
     r = pad.GetRightMargin()
 
-    pad_ratio = (float(pad.GetWh()) * pad.GetAbsHNDC()) / \
-        (float(pad.GetWw()) * pad.GetAbsWNDC())
-    if pad_ratio < 1.:
-        pad_ratio = 1.
+    pad_ratio = (float(pad.GetWh()) * pad.GetAbsHNDC()) / (
+        float(pad.GetWw()) * pad.GetAbsWNDC()
+    )
+    if pad_ratio < 1.0:
+        pad_ratio = 1.0
 
     textOffset = 0.2
 

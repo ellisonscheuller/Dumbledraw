@@ -4,6 +4,7 @@
 import logging
 import ROOT
 import copy
+
 logger = logging.getLogger(__name__)
 
 
@@ -19,8 +20,9 @@ class Rootfile_parser(object):
         for entry in content:
             if entry.endswith("postfit"):
                 self._type = "postfit"
-        logger.debug("Identified rootfile %s as %s shapes" %
-                     (inputrootfilename, self._type))
+        logger.debug(
+            "Identified rootfile %s as %s shapes" % (inputrootfilename, self._type)
+        )
         if mode == "standard":
             self._hist_hash = "{channel}_{category}{plottype}/{process}{unc}"
         elif mode == "CombineHarvester":
@@ -36,8 +38,7 @@ class Rootfile_parser(object):
 
     def get(self, era, channel, category, process, syst=None):
         if syst != None and self._type != "control":
-            logger.fatal(
-                "Uncertainty shapes are only available in control plots!")
+            logger.fatal("Uncertainty shapes are only available in control plots!")
             raise Exception
         hist_hash = self._hist_hash.format(
             era=era,
@@ -45,31 +46,40 @@ class Rootfile_parser(object):
             category=category,
             process=process,
             plottype="{plottype}",
-            unc="{unc}")
+            unc="{unc}",
+        )
         if self._type == "control":
             syst = "" if syst == None else "_" + syst
             hist_hash = hist_hash.format(plottype="", unc=syst)
         else:
             hist_hash = hist_hash.format(plottype="_" + self._type, unc="")
-        logger.debug(
-            "Try to access %s in %s" % (hist_hash, self._rootfilename))
+        logger.debug("Try to access %s in %s" % (hist_hash, self._rootfilename))
         # perform check if file is available and otherwise return some dummy TH1F
-        available_processes = [entry.GetName() for entry in self._rootfile.Get(hist_hash.split('/')[0]).GetListOfKeys()]
-        if hist_hash.split('/')[1] in available_processes:
+        available_processes = [
+            entry.GetName()
+            for entry in self._rootfile.Get(hist_hash.split("/")[0]).GetListOfKeys()
+        ]
+        if hist_hash.split("/")[1] in available_processes:
             return self._rootfile.Get(hist_hash)
         elif len(available_processes) != 0:
-            logger.warning("%s in %s does not exist !" % (hist_hash, self._rootfilename))
+            logger.warning(
+                "%s in %s does not exist !" % (hist_hash, self._rootfilename)
+            )
             logger.debug(" Available Histograms are: %s" % available_processes)
             logger.debug(" Returning a dummy histogram ")
-            dummy = self._rootfile.Get('{}/{}'.format(hist_hash.split('/')[0],available_processes[0]))
+            dummy = self._rootfile.Get(
+                "{}/{}".format(hist_hash.split("/")[0], available_processes[0])
+            )
             dummy.Reset()
             dummy.SetTitle(process)
             dummy.SetName(hist_hash)
             return dummy
         else:
-            logger.fatal(" None of the requested Histograms are available in %s. Aborting." % hist_hash.split('/')[0])
+            logger.fatal(
+                " None of the requested Histograms are available in %s. Aborting."
+                % hist_hash.split("/")[0]
+            )
             raise Exception
-
 
     def get_bins(self, era, channel, category, process, syst=None):
         hist = self.get(era, channel, category, process, syst)
