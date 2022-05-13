@@ -70,7 +70,7 @@ def main(args):
 				#print rootfile.list_contents()
 				name = "_".join([channel, category])
 				out_name = "_".join([channel, category, variable])
-				print name	
+				print(name)	
 	
 				# create canvas:
 				#   First argument defines subplot structure: List of splits from top to bottom (max. 1.0 to min. 0.0). A split can be a single position or a pair resulting in gap.
