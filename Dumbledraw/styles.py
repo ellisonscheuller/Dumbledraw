@@ -1,7 +1,9 @@
 import ROOT as R
 import logging
 import yaml
+from itertools import cycle
 logger = logging.getLogger(__name__)
+import os
 
 COL_STORE = []
 labels_path = 'Dumbledraw/Dumbledraw/labels.yaml'
@@ -20,9 +22,15 @@ def CreateTransparentColor(color, alpha):
 legend_label_dict = yaml.load(open(labels_path))['legend_label']
 x_label_dict = yaml.load(open(labels_path))['x_label']
 
+mass_dict= yaml.load(open("shapes/mass_dict_nmssm.yaml"), Loader=yaml.Loader)["plots"]
+
+
 color_dict = {
     "ggH": R.TColor.GetColor("#fed766"),
     "qqH": R.TColor.GetColor("#2ab7ca"),
+    "ggH125": R.TColor.GetColor("#BF2229"),
+    "qqH125": R.TColor.GetColor("#00A88F"),
+    "HTT": R.TColor.GetColor("#00A88F"),
     "VH": R.TColor.GetColor("#001EFF"),
     "WH": R.TColor.GetColor("#001EFF"),
     "ZH": R.TColor.GetColor("#001EFF"),
@@ -67,8 +75,22 @@ color_dict = {
     "TotalBkg": R.TColor.GetColor(211,211,211),
     "REST": R.TColor.GetColor("#B0C4DE"),
     "unc": CreateTransparentColor(12, 0.4)
+
 }
 
+
+i=0
+colors=["#8B008B", "#008a8a", "#8a0022", "#22008a","#8a8a00"]
+sig_colors=cycle(colors)
+for heavy_mass in mass_dict["heavy_mass"]:
+    light_masses = mass_dict["light_mass_coarse"] if heavy_mass > 1001 else mass_dict["light_mass_fine"]
+    for color in sig_colors:
+        if i<len(light_masses):
+            if light_masses[i]+125<heavy_mass:
+                color_dict["NMSSM_{heavy_mass}_125_{light_mass}".format(heavy_mass=heavy_mass,light_mass=light_masses[i])] = R.TColor.GetColor(color)
+                i+=1
+        else:
+            break
 
 def SetStyle(name, **kwargs):
     styles = {"none": none, "TDR": SetTDRStyle, "ModTDR": ModTDRStyle}
@@ -269,7 +291,7 @@ def ModTDRStyle(width=600, height=600, t=0.06, b=0.12, l=0.16, r=0.04):
     R.gStyle.SetNdivisions(506, 'XYZ')  # default 510
 
     # Some marker properties not set in the default tdr style
-    R.gStyle.SetMarkerColor(R.kBlack)
+    #R.gStyle.SetMarkerColor(R.kBlack)
     R.gStyle.SetMarkerSize(1.0)
 
     R.gStyle.SetLabelOffset(0.007, 'YZ')
